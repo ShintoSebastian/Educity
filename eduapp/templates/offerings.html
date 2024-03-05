@@ -3,73 +3,30 @@
 {% block content %}
 {% include "navbar.html" %}
 <div class="container">
-    <div class="row mt-5 ">
-        <div class=" col-sm-6 ">
-            <h1 >
-                Offerings
-            </h1>
-            <span>
-                There's always something to do when you're in Education City.
-            </span>
+    <div class="tab_box">
+        <button class="tab_btn">All</button>
+        <button class="tab_btn">Events</button>
+        <button class="tab_btn">Facilities</button>
+        <button class="tab_btn">Bookings</button>
+    </div>
+    <div class="content_box">
+        <div class="content">
+            <h2>All</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores corrupti, sequi, ducimus laborum velit praesentium rerum ipsam nostrum vero temporibus voluptas est. Quasi doloribus ab iste debitis at deleniti excepturi?</p>
         </div>
-        <div class=" col-sm-6 text-right filter-btn d-flex justify-content-end text-sm-right"><div>      
-            <button class="btn btn-dark ">Filter</button></div>
+        <div class="content">
+            <h2>Events</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores corrupti, sequi, ducimus laborum velit praesentium rerum ipsam nostrum vero temporibus voluptas est. Quasi doloribus ab iste debitis at deleniti excepturi?</p>
         </div>
-    </div></div>
-    <div class="container">
-        <div class="col-md-6 mt-4">
-            <div class="row">
-                <div class="col"><button class="btn btn-light  ev-btn ml-0">ALL</button></div>
-                <div class="col"><button class="btn btn-light  ev-btn ml-0">EVENTS </button></div>
-                <div class="col"><button class="btn btn-light  ev-btn ml-0">VENUE </button></div>
-                <div class="col"><button class="btn btn-light  ev-btn ml-0"> CLASSES</button></div>
-            </div>
+        <div class="content">
+            <h2>Facilities</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores corrupti, sequi, ducimus laborum velit praesentium rerum ipsam nostrum vero temporibus voluptas est. Quasi doloribus ab iste debitis at deleniti excepturi?</p>
         </div>
-        <div class="col-md-10">
-
+        <div class="content">
+            <h2>bookings</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores corrupti, sequi, ducimus laborum velit praesentium rerum ipsam nostrum vero temporibus voluptas est. Quasi doloribus ab iste debitis at deleniti excepturi?</p>
         </div>
     </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form action="">
-                <label >Search</label><br>
-                <input type="text"><br>
-                <label >Things to do</label><br>
-                <select name="" id="" data-placeholder="select" >
-                    <option value="op1">Sports and Fitness</option>
-                    <option value="op2">Health and Fitness</option>
-                    <option value="op3">Arts and Culture</option>
-                    <option value="op4">EDUCATION</option>
-                    <option value="op5">Talks And Lectures</option>
-                    <option value="op6">Kids and Families</option>
-                    <option value="op7">Ladies Only</option>
-                    <option value="op8">Community</option>
-                    <option value="op9" disabled selected>Select  </option>
-
-                </select><br>
-                <label for="date">Select Date</label><br>
-                <input type="date" id="date"><br>
-                <label for="">Select Time</label><br>
-                <select name="" id="">
-                    <option value="t1">12 AM - 06 Am</option>
-                    <option value="t2">06 AM - 12 PM</option>
-                    <option value="t3">12 PM - 06 PM</option>
-                    <option value="t4">06 PM - 12 AM</option>
-                    <option value="t5" selected>Select</Select></option>
-                </select><br>
-                <label for="">Gender</label><br>
-                <label for="">Male</label>
-                <input type="checkbox">
-                <label for="">Female</label>
-                <input type="checkbox"><br>
-                <button class="btn btn-dark search-btn">Search</button>
-            </form>
-        </div>
-        <div class="col-md-6"></div>
-    </div>
-
 </div>
 {% include "footer.html" %}
 {% endblock content %}
