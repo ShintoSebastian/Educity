@@ -1,0 +1,608 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+        <!-- begin:: Content -->
+            <style>
+        .select2-selection--multiple{
+            overflow: hidden !important;
+            height: auto !important;
+        }
+    </style>
+    <div class="activity-wrapper search-result-wrapper">
+        <div class="container-lg py-md-5 py-3">
+            <div class="search-container">
+                <div class="header-top">
+                                        
+                    <input type="hidden" value="" id="things_to_do_ids" />
+                    <div>
+                        <h1 class="text-primary mb-3">Offerings</h1>
+                        <p>There's always something to do when you’re in Education City.</p>
+                    </div>
+                    
+                </div>
+                <div class="search-filter0 search-block show" id="collapseExample">
+                    <ul class="nav  gap-1 search-top-nav search-result-top-nav" id="myTab" role="tablist">
+
+                        <li class="nav-item" role="presentation" data-search_type='all'>
+                            <a href="/search_all" class="btn btn-spotlight " >All</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='event'>
+                            <a href='/search_event' class="btn btn-spotlight ">Events</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='venue'>
+                            <a href='/search_venue' class="btn btn-spotlight active">Venues</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='class'>
+                            <a href='/search_class' class="btn btn-spotlight ">Classes</a>
+                        </li>
+                    </ul>
+     
+                        
+                        
+                        
+
+                    <div class="form">
+                        <form name="searchResultForm" id="searchResultForm" method="POST">
+                            {% csrf_token %}
+                    
+                            <div class="tab-content" id="searchResultTabContent">
+
+
+                              <div class="tab-pane fade active show "
+                                     id="result-venue-tab" role="tabpanel" aria-labelledby="result-venues">
+                                    <div class="form activities-new">
+                                        <div class="row gx-2 mt-4 row-cols-xl-5">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field">
+                                                    <label>Search</label>
+                                                    <div class="form-group search-field">
+                                                        <input type="text" class="form-control search-form"
+                                                               aria-describedby="result_venue_search_key"
+                                                               name='venue_search_key'
+                                                               value=""
+                                                               placeholder="Eg: Education City Student Center">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group things-to-do search-field">
+                                                    <label>Things to do</label>
+                                                    <select class="form-select kt-select2" name="venue_things_to_do[]"
+                                                            id="result_venue_things_to_do" multiple data-placeholder="Select" >
+                                                                                                                    <option value="58"
+                                                                >
+                                                                Sports and Fitness</option>
+                                                                                                                    <option value="4"
+                                                                >
+                                                                Ladies Only</option>
+                                                                                                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field">
+                                                    <label>Venue Type</label>
+                                                    <select class="form-select kt-select2" name="venue_type"
+                                                            id="result_venue_type">
+                                                        <option value="">Select</option>
+                                                                                                                    <option value="1"
+                                                                >
+                                                                Studio Room</option>
+                                                                                                                    <option value="3"
+                                                                >
+                                                                Theatre</option>
+                                                                                                                    <option value="5"
+                                                                >
+                                                                Computer Lab</option>
+                                                                                                                    <option value="7"
+                                                                >
+                                                                Gyms and Studios</option>
+                                                                                                                    <option value="14"
+                                                                >
+                                                                Lounges</option>
+                                                                                                                    <option value="15"
+                                                                >
+                                                                Park</option>
+                                                                                                                    <option value="20"
+                                                                >
+                                                                Outdoor Sports Courts</option>
+                                                                                                                    <option value="22"
+                                                                >
+                                                                Swimming Pools</option>
+                                                                                                                    <option value="28"
+                                                                >
+                                                                Meeting and Conference Rooms</option>
+                                                                                                                    <option value="38"
+                                                                >
+                                                                Landmarks</option>
+                                                                                                                    <option value="51"
+                                                                >
+                                                                Indoor Sports Courts</option>
+                                                                                                                    <option value="53"
+                                                                >
+                                                                Golf Lessons</option>
+                                                                                                                    <option value="54"
+                                                                >
+                                                                Kitchen and Lab</option>
+                                                                                                                    <option value="55"
+                                                                >
+                                                                Spa</option>
+                                                                                                                    <option value="56"
+                                                                >
+                                                                Tram</option>
+                                                                                                                    <option value="57"
+                                                                >
+                                                                Awsaj Bikes</option>
+                                                                                                                    <option value="58"
+                                                                >
+                                                                Portable Badminton</option>
+                                                                                                                    <option value="59"
+                                                                >
+                                                                Dining</option>
+                                                                                                                    <option value="60"
+                                                                >
+                                                                Museums</option>
+                                                                                                                    <option value="61"
+                                                                >
+                                                                Stadium</option>
+                                                                                                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field">
+                                                    <label>Landmark &amp; Building</label>
+                                                    <select class="form-select kt-select2" name="venue_landmark"
+                                                            id="result_venue_landmark">
+                                                        <option value="">Select</option>
+                                                                                                                    <option data-venue-lat="25.678789"
+                                                                    data-venue-lng="51.500111"
+                                                                    value="1"
+                                                                >
+                                                                Qatar Academy Al Khor
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.148370"
+                                                                    data-venue-lng="51.582953"
+                                                                    value="4"
+                                                                >
+                                                                Qatar Academy Al Wakrah
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.314091"
+                                                                    data-venue-lng="51.427213"
+                                                                    value="7"
+                                                                >
+                                                                Awsaj Recreation
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.288127"
+                                                                    data-venue-lng="51.524321"
+                                                                    value="8"
+                                                                >
+                                                                Qatar Academy Msheireb
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.316338"
+                                                                    data-venue-lng="51.427863"
+                                                                    value="9"
+                                                                >
+                                                                Recreation Centre
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.326264"
+                                                                    data-venue-lng="51.418818"
+                                                                    value="10"
+                                                                >
+                                                                Education City Club House
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3147446"
+                                                                    data-venue-lng="51.4396404"
+                                                                    value="49"
+                                                                >
+                                                                Multaqa
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.313125"
+                                                                    data-venue-lng="51.4444708"
+                                                                    value="51"
+                                                                >
+                                                                Oxygen Park
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3062339"
+                                                                    data-venue-lng="51.4373388"
+                                                                    value="166"
+                                                                >
+                                                                Al Shaqab
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3048667"
+                                                                    data-venue-lng="51.4195194"
+                                                                    value="167"
+                                                                >
+                                                                Education City Golf Club
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3172041"
+                                                                    data-venue-lng="51.4473964"
+                                                                    value="169"
+                                                                >
+                                                                Education City Mosque
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.31773135614741"
+                                                                    data-venue-lng="51.44124217781067"
+                                                                    value="170"
+                                                                >
+                                                                Qatar National Library
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3130906"
+                                                                    data-venue-lng="51.4371925"
+                                                                    value="185"
+                                                                >
+                                                                Ceremonial Court
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3163898"
+                                                                    data-venue-lng="51.4352082"
+                                                                    value="186"
+                                                                >
+                                                                Ceremonial Green Spine
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.310569"
+                                                                    data-venue-lng="51.419252"
+                                                                    value="187"
+                                                                >
+                                                                Mathaf: Arab Museum of Modern Art
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.315405"
+                                                                    data-venue-lng="51.434567"
+                                                                    value="188"
+                                                                >
+                                                                Liberal Arts &amp; Science Building
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3179154"
+                                                                    data-venue-lng="51.4364366"
+                                                                    value="191"
+                                                                >
+                                                                Qatar Foundation Headquarters
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3099773"
+                                                                    data-venue-lng="51.4327893"
+                                                                    value="195"
+                                                                >
+                                                                Chef&#039;s Garden - Marwan Club
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.318341"
+                                                                    data-venue-lng="51.445628"
+                                                                    value="197"
+                                                                >
+                                                                Northwestern University in Qatar
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3476978"
+                                                                    data-venue-lng="51.4656435"
+                                                                    value="198"
+                                                                >
+                                                                Qatar Nanny Training Academy
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.276504"
+                                                                    data-venue-lng="51.54234"
+                                                                    value="200"
+                                                                >
+                                                                Qatar Diabetes Association
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3073597"
+                                                                    data-venue-lng="51.4135809"
+                                                                    value="201"
+                                                                >
+                                                                Qatar Academy Sidra
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3131548"
+                                                                    data-venue-lng="51.4262191"
+                                                                    value="202"
+                                                                >
+                                                                Qatar Academy for Science and Technology (QAST)
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3181364"
+                                                                    data-venue-lng="51.4286601"
+                                                                    value="203"
+                                                                >
+                                                                Education City Tram
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3152793"
+                                                                    data-venue-lng="51.4329244"
+                                                                    value="204"
+                                                                >
+                                                                Virginia Commonwealth University School of the Arts in Qatar
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3100105"
+                                                                    data-venue-lng="51.4322979"
+                                                                    value="205"
+                                                                >
+                                                                Marwan Club
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3089403"
+                                                                    data-venue-lng="51.4320589"
+                                                                    value="227"
+                                                                >
+                                                                Seeroo fi al ardh
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3115372"
+                                                                    data-venue-lng="51.4301096"
+                                                                    value="229"
+                                                                >
+                                                                Pre University Education HQ
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.318211"
+                                                                    data-venue-lng="51.443331"
+                                                                    value="264"
+                                                                >
+                                                                Georgetown University in Qatar
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3160219"
+                                                                    data-venue-lng="51.4455092"
+                                                                    value="265"
+                                                                >
+                                                                Qur&#039;anic Botanic Garden
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.2829761"
+                                                                    data-venue-lng="51.4987144"
+                                                                    value="267"
+                                                                >
+                                                                Tariq Bin Ziad Recreation
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3108125"
+                                                                    data-venue-lng="51.4244375"
+                                                                    value="270"
+                                                                >
+                                                                Education City Stadium
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.333962"
+                                                                    data-venue-lng="51.4188913"
+                                                                    value="277"
+                                                                >
+                                                                Sidra Village
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3133375"
+                                                                    data-venue-lng="51.4268997"
+                                                                    value="280"
+                                                                >
+                                                                Awsaj Academy
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3217605"
+                                                                    data-venue-lng="51.3964915"
+                                                                    value="281"
+                                                                >
+                                                                Qatar National Convention Centre
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.328007"
+                                                                    data-venue-lng="51.428199"
+                                                                    value="282"
+                                                                >
+                                                                Education City Mountain Bike Trail
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.316422"
+                                                                    data-venue-lng="51.4376108"
+                                                                    value="283"
+                                                                >
+                                                                Carnegie Mellon University in Qatar
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.308514"
+                                                                    data-venue-lng="51.452655"
+                                                                    value="284"
+                                                                >
+                                                                Al Shaqab Parking
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3094683"
+                                                                    data-venue-lng="51.4115303"
+                                                                    value="285"
+                                                                >
+                                                                Al Mujadilah Center and Mosque for Woman
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3228255"
+                                                                    data-venue-lng="51.444793"
+                                                                    value="287"
+                                                                >
+                                                                Sidra Medicine
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3157315"
+                                                                    data-venue-lng="51.427951"
+                                                                    value="288"
+                                                                >
+                                                                Qatar Academy Doha
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3169525"
+                                                                    data-venue-lng="51.4361527"
+                                                                    value="289"
+                                                                >
+                                                                ThinkBay
+                                                            </option>
+                                                                                                                    <option data-venue-lat="25.3171407"
+                                                                    data-venue-lng="51.4292946"
+                                                                    value="291"
+                                                                >
+                                                                The Dome
+                                                            </option>
+                                                                                                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                {% comment %} <div class="form-group search-field">
+                                                    <label>Capacity</label>
+                                                    <div class="form-group search-field">
+                                                        <input type="text" class="form-control search-form" placeholder"Eg:25000">
+                                                        </div>
+                                                </div> {% endcomment %}
+                                            </div>
+                                            <div class="col-sm-6">
+                                                {% comment %} <div class="form-group search-field">
+                                                    <label>Status</label>
+                                                    <div class="form-group search-field search-form-checkbox pt-2">
+                                                        <div class="form-check custom-check term-check form-check-inline">
+                                                            <input class="form-check-input mr-4"
+                                                                   id="result_venue_bookable" name="venue_bookable"
+                                                                   type="radio"
+                                                                   
+                                                                   value="1" readonly="">
+                                                            <label class="form-check-label"
+                                                                   for="result_venue_bookable">Bookable
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check custom-check term-check form-check-inline">
+                                                            <input class="form-check-input" id="result_venue_unbookable"
+                                                                   name="venue_unbookable" type="radio" value="1"
+                                                                   
+                                                                   readonly="">
+                                                            <label class="form-check-label"
+                                                                   for="result_venue_unbookable">Not Bookable</label>
+                                                        </div>
+                                                    </div>
+                                                </div> {% endcomment %}
+                                            </div>
+                                            <div class="col-sm-6">
+                                                {% comment %} <div class="form-group search-field">
+                                                    <label>Gender</label>
+                                                    <div class="search-form-checkbox pt-2">
+                                                        <div class="form-check custom-check term-check form-check-inline">
+                                                            <input class="form-check-input mr-4" id="result_venue_male"
+                                                                   name="venue_gender_male" type="checkbox" value="Male"
+                                                                   
+                                                                   readonly="">
+                                                            <label class="form-check-label"
+                                                                   for="result_venue_male">Male </label>
+                                                        </div>
+                                                        <div class="form-check custom-check term-check form-check-inline">
+                                                            <input class="form-check-input" id="result_venue_female"
+                                                                   name="venue_gender_female" type="checkbox" value="Female"
+                                                                   
+                                                                   readonly="">
+                                                            <label class="form-check-label"
+                                                                   for="result_venue_female">Female</label>
+                                                        </div>
+                                                    </div>
+                                                </div> {% endcomment %}
+                                            </div>
+
+
+                                            <div class="search-btn col-sm-12 pt-1 order-2 order-xl-0 ms-xl-auto">
+                                                <button type="submit"
+                                                        class="btn btn-primary search-btn w-100 mt-xl-4 mb-2 mb-xl-0">Search</button>
+                                                    </div>
+
+                                                </div>
+        
+                                            </div>
+        
+                                        </div>
+        
+                                    </div>
+                                    
+                                </form>
+                            </div>
+        
+                        </div>
+                        <!--subtags -->
+                        <h4 class="text-primary"></h4>
+                                        <!--minitags -->
+                    </div>
+                </div>
+
+
+
+
+  <!-- Container -->
+  <div id="search-result-container">
+    <section class="pt-4 pt-md-5 pb-3 membershipNew-sec">
+     <div class="container-lg pt-0 pt-xl-4">
+      <div class="row align-items-center justify-content-between mb-4 mb-xl-5">
+       <div class="col-12 col-sm">
+      </div>
+      <div class="col-auto page-count-select">
+       <div class="">
+       <select class="btn-perpage kt-select2" id="per_page" name="per_page" placeholder="">
+        <option selected value="8">8 Per page</option>
+        <option value="16">16 Per page</option>
+       </select>
+       <select class="btn-perpage kt-select2" id="sort_by" name="sort_by" placeholder="">
+        <option selected value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <div class="row gx-2 gy-2 search-list pb-xl-5">
+    {% for venue in venues %}
+     <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="list-item-bordered activity-item offerings">
+       <div class="list-item mx-2 mb-3 membershipNew-items">
+        <figure>
+         <a  href="{{ venue.activity_image.url }}" >
+          <img class="img-fluid "
+           src="{{ venue.activity_image.url }}"
+          alt="" />
+         </a>
+        </figure>
+        <div class="content-holder">
+         <div class="d-flex align-items-center justify-content-between">
+          <div class="mem-content membershipNew-content">
+           <h5 class="text-white text-capitalize mbe-0">{{venue.activityname}}</h5>
+           <div class="card-text text-white">{{ venue.start_time }}{{ venue.end_time }}</div>
+           <div  class="text-white card-text centre">
+            <i class="fa fa-map-marker-alt pe-3"></i>{{ venue.landmark }}
+           </div>
+          </div>
+         </div>
+         <!-- hover -->
+        <div class="activity-wrappers">
+          <div class="list-btn-holder gap-2 activity-hover">
+           <a class="btn btn-primary bg-white btn-list text-primary bg-hover-primary" href="https://educationcity.qa/event/bruckner-meets-mozart" role="button">View Details</a>
+           <a class="btn btn-outline-primary btn-list wish-list-button" name="event" id="1330" title="Add to wishlist" role="add" tabindex="0"><i class="bi bi-bookmark-dash"></i></a>
+           <a class="btn btn-outline-primary btn-list share-button" title="Bruckner Meets Mozart" name="https://educationcity.qa/event/bruckner-meets-mozart" role="button"><i class="bi bi-reply d-block flip-90"></i></a>
+          </div>
+         </div>
+        </div>
+ 
+       </div>
+      </div>
+     </div>
+     {% endfor %}
+
+    
+ </section>
+ <div class="container-lg py-5">
+  <ul class="pagination justify-content-center">
+   
+      <li class="disabled d-none"><i class="bi bi-chevron-left"></i></li>
+   
+                 <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=2">2</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=3">3</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=4">4</a></li>
+            
+   
+         <li class="page-item">
+     <a class="page-link" href="https://educationcity.qa/events?page=2" rel="next" aria-label="Next &raquo;"><i class="bi bi-chevron-right"></i></a>
+    </li>
+ 
+    </ul>
+ 
+ 
+ </div>
+ <div class="modal fade" id="social-share-modal" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered page-modal" role="document">
+   <div class="modal-content">
+    <div class="modal-body p-4">
+ 
+     <h5 class="modal-title" id="interestedModalLabel">Share</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     <div class="modal-body text-center">
+      <div class="inner inner-center" id="shareable_content">
+ 
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ 
+ 
+   </div>
+   <main class="main-wrapper">
+  </div>
+  </div>
+   
+  
+  {% endblock %}

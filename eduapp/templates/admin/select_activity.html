@@ -1,0 +1,20 @@
+
+{% extends 'admin/adminbase.html' %}
+{% block content %}
+
+<div class="wrapper">
+   
+    <form method="post" action="{% url 'select_activity' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Category</label>
+        <select name="category" id="category">
+            <option value="event">Event</option>
+            <option value="class">Class</option>
+            <option value="venue">Venue</option>
+        </select>
+        <input type="submit">
+    </form>
+</div>
+    {% endblock content %}
+
+

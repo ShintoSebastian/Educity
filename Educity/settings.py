@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eduapp',
+    'widget_tweaks',
 ]
 AUTHENTICATION_BACKEND=[
     'django.contrib.auth.backends.ModelBackend'
@@ -115,6 +116,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL='/admin-dashboard'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

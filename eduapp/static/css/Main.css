@@ -8,9 +8,6 @@ body {
     display: flex;
     flex-direction: column;
   }
-  .btn{
-    width: auto !important;
-  }
 .navbar-toggler {
     border: 0 !important;
 }
@@ -231,16 +228,131 @@ body {
 .nav-anc{
   transition: 0.6s !important;
 }
-.tab_btn{
-  width: 100% !important  ;
-  height: auto !important;
+
+.tab-btn{
   border: 1px solid rgb(17, 31, 72);
-  padding: 0%;
-  outline: none;
-  color:  rgb(17, 31, 72);
+}
+.tab-btn:hover{
+  color: White;
+  background-color:rgb(17, 31, 72) ;
+}
+.content-div label{
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(17, 31, 72);
+}
+.form-check-label{
+  font-size: 16px;
+  font-weight:none !important;
+}
+.card-cont {
+  align-items: center;
+  justify-content:center ;
+  display: flex;
+  
+}
+.about-cover{
+  
+  height:350px;
+  width:100%;
+}
+.about-img img{
+  height: 350px;
+  width: 100%;
+  border-radius: 5%;
+  box-shadow:2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+}
+.about-flip img{
+  height: 350px;
+  width: 100%;
+  border-radius:5% ;
+}
+.flip-container{
+  position: relative;
+}
+.img-container{
+  position: relative;
+ 
+}
+.img-container img{
+  display: block;
+
+ 
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:350px;
+  background-color:#fff;
+  opacity: 0;
+  transition: opacity 0.5s;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  box-shadow:2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  overflow: hidden;
 
 }
-.tab_btn:hover{
-background-color:rgb(17, 31, 72);
-color: #fff !important;
+.img-container:hover .overlay{
+  opacity: 1;
+}
+
+.img-container:hover p{
+  opacity: 1;
+
+}
+.overlay p,button{
+margin: 20px 20px 0 20px;
+}
+.overlay p{
+  max-height: 60%;
+  overflow: hidden;
+}
+.register-form label{
+  font-weight: bold;
+  color: rgb(148, 148, 148);
+  margin-bottom:10px ;
+}
+.register-form input,select{
+  margin-bottom:15px;
+}
+.login-form label{
+  font-weight: bold;
+  color: rgb(148, 148, 148);
+  margin-bottom:10px ;
+}
+.login-form input{
+  margin-bottom:15px;
+}
+
+.banner-video{
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 50px;
+  position: relative;
+}
+.banner-text{
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #fff;
+  text-align: start;
+  z-index: 1;
+  font-weight: 600;
+}
+.book-btn{
+  display: none;
+}
+
+.offer:hover .book-btn{
+  display:block;
+  transform: scale(1);
+  transition: 0.6s;
 }

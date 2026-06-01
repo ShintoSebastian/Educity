@@ -1,0 +1,651 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+        <!-- begin:: Content -->
+            <style>
+        .select2-selection--multiple{
+            overflow: hidden !important;
+            height: auto !important;
+        }
+    </style>
+    <div class="activity-wrapper search-result-wrapper">
+        <div class="container-lg py-md-5 py-3">
+            <div class="search-container">
+                <div class="header-top">
+                                        
+                    <input type="hidden" value="" id="things_to_do_ids" />
+                    <div>
+                        <h1 class="text-primary mb-3">Offerings</h1>
+                        <p>There's always something to do when you’re in Education City.</p>
+                    </div>
+                    
+                </div>
+                <div class="search-filter0 search-block show" id="collapseExample">
+                    <ul class="nav  gap-1 search-top-nav search-result-top-nav" id="myTab" role="tablist">
+
+                        <li class="nav-item" role="presentation" data-search_type='all'>
+                            <a href="/search_all" class="btn btn-spotlight " >All</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='event'>
+                            <a href='/search_event' class="btn btn-spotlight ">Events</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='venue'>
+                            <a href='/search_venue' class="btn btn-spotlight ">Venues</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='class'>
+                            <a href='/search_class' class="btn btn-spotlight active">Classes</a>
+                        </li>
+                    </ul>
+
+<div class="form">
+    <form name="searchResultForm" id="searchResultForm" method="POST">
+         {% csrf_token %}
+
+        <div class="tab-content" id="searchResultTabContent">
+
+                                
+                                <div class="tab-pane fade active show"
+                                id="result-class-tab" role="tabpanel" aria-labelledby="result-classes">
+                               <div class="form activities-new">
+                                   <div class="row gx-2 mt-4 row-cols-xl-5">
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field things-to-do">
+                                               <label>Search</label>
+                                               <div class="form-group search-field">
+                                                   <input type="text" class="form-control search-form"
+                                                          aria-describedby="result_class_search_key"
+                                                          name='class_search_key'
+                                                          value=""
+                                                          placeholder="Eg: Education City Student Center">
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field things-to-do">
+                                               <label>Things to do</label>
+                                               <select class="form-select kt-select2" name="class_things_to_do[]"
+                                                       id="result_class_things_to_do" multiple="multiple" data-placeholder="Select" >
+                                                                                                               <option value="25"
+                                                           >
+                                                           Community</option>
+                                                                                                               <option value="58"
+                                                           >
+                                                           Sports and Fitness</option>
+                                                                                                               <option value="4"
+                                                           >
+                                                           Ladies Only</option>
+                                                                                                               <option value="33"
+                                                           >
+                                                           Ability Friendly</option>
+                                                                                                               <option value="2"
+                                                           >
+                                                           Education</option>
+                                                                                                       </select>
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field">
+                                               <label>Class Type</label>
+                                               <select class="form-select kt-select2" name="class_type"
+                                                       id="result_class_type">
+                                                   <option value="">Select</option>
+                                                                                                               <option value="1"
+                                                           >
+                                                           Community Learning</option>
+                                                                                                               <option value="2"
+                                                           >
+                                                           Gymnastics</option>
+                                                                                                               <option value="3"
+                                                           >
+                                                           Swimming</option>
+                                                                                                               <option value="4"
+                                                           >
+                                                           Cricket</option>
+                                                                                                               <option value="5"
+                                                           >
+                                                           Tennis</option>
+                                                                                                               <option value="6"
+                                                           >
+                                                           Squash</option>
+                                                                                                               <option value="7"
+                                                           >
+                                                           Karate</option>
+                                                                                                               <option value="8"
+                                                           >
+                                                           Football</option>
+                                                                                                               <option value="9"
+                                                           >
+                                                           Basketball</option>
+                                                                                                               <option value="10"
+                                                           >
+                                                           Roller Skates</option>
+                                                                                                               <option value="11"
+                                                           >
+                                                           Ballet</option>
+                                                                                                               <option value="14"
+                                                           >
+                                                           Golf</option>
+                                                                                                               <option value="15"
+                                                           >
+                                                           Badminton</option>
+                                                                                                               <option value="16"
+                                                           >
+                                                           Atheltics</option>
+                                                                                                               <option value="19"
+                                                           >
+                                                           Volleyball</option>
+                                                                                                               <option value="20"
+                                                           >
+                                                           Workshops</option>
+                                                                                                               <option value="21"
+                                                           >
+                                                           Camp</option>
+                                                                                                               <option value="23"
+                                                           >
+                                                           Playball</option>
+                                                                                                               <option value="24"
+                                                           >
+                                                           Dance</option>
+                                                                                                               <option value="27"
+                                                           >
+                                                           Martial Arts</option>
+                                                                                                               <option value="30"
+                                                           >
+                                                           seminar</option>
+                                                                                                               <option value="31"
+                                                           >
+                                                           Activities</option>
+                                                                                                               <option value="32"
+                                                           >
+                                                           Heatlh and Fitness</option>
+                                                                                                       </select>
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field">
+                                               <label>Landmark &amp; Building</label>
+                                               <select class="form-select kt-select2" name="class_landmark"
+                                                       type="text" placeholder="">
+                                                   <option value="">Select</option>
+                                                                                                               <option value="1"
+                                                           >
+                                                           Qatar Academy Al Khor</option>
+                                                                                                               <option value="2"
+                                                           >
+                                                           Competition Pool - QAK</option>
+                                                                                                               <option value="3"
+                                                           >
+                                                           Learner Pool - QAK</option>
+                                                                                                               <option value="4"
+                                                           >
+                                                           Qatar Academy Al Wakrah</option>
+                                                                                                               <option value="5"
+                                                           >
+                                                           Male Gym - QAK</option>
+                                                                                                               <option value="6"
+                                                           >
+                                                           Ladies Gym - QAK</option>
+                                                                                                               <option value="7"
+                                                           >
+                                                           Awsaj Recreation</option>
+                                                                                                               <option value="8"
+                                                           >
+                                                           Qatar Academy Msheireb</option>
+                                                                                                               <option value="9"
+                                                           >
+                                                           Recreation Centre</option>
+                                                                                                               <option value="10"
+                                                           >
+                                                           Education City Club House</option>
+                                                                                                               <option value="11"
+                                                           >
+                                                           AaQool Atrium - Recreation Centre</option>
+                                                                                                               <option value="13"
+                                                           >
+                                                           Shafallah Conference Room - Recreation Centre</option>
+                                                                                                               <option value="14"
+                                                           >
+                                                           Football Pitch - QAK</option>
+                                                                                                               <option value="15"
+                                                           >
+                                                           Basketball Court - QAK</option>
+                                                                                                               <option value="16"
+                                                           >
+                                                           Studio Room - QAK</option>
+                                                                                                               <option value="17"
+                                                           >
+                                                           Volleyball Court - QAK</option>
+                                                                                                               <option value="18"
+                                                           >
+                                                           Running Track - QAK</option>
+                                                                                                               <option value="19"
+                                                           >
+                                                           QAM Multi-Purpose Court</option>
+                                                                                                               <option value="21"
+                                                           >
+                                                           QAM Studio Room</option>
+                                                                                                               <option value="22"
+                                                           >
+                                                           Green Floor Court - Recreation Centre</option>
+                                                                                                               <option value="24"
+                                                           >
+                                                           Gymnastics Room - Recreation Centre</option>
+                                                                                                               <option value="25"
+                                                           >
+                                                           Studio Room - Recreation Centre</option>
+                                                                                                               <option value="27"
+                                                           >
+                                                           Squash Court - Recreation Centre</option>
+                                                                                                               <option value="29"
+                                                           >
+                                                           Training Pool - Recreation Centre</option>
+                                                                                                               <option value="30"
+                                                           >
+                                                           Splash Pool - Recreation Centre</option>
+                                                                                                               <option value="31"
+                                                           >
+                                                           Mixed Gym - Recreation Centre</option>
+                                                                                                               <option value="32"
+                                                           >
+                                                           Ladies Gym - Recreation Centre</option>
+                                                                                                               <option value="40"
+                                                           >
+                                                           Basketball Court - Awsaj</option>
+                                                                                                               <option value="41"
+                                                           >
+                                                           Football Court - Awsaj</option>
+                                                                                                               <option value="42"
+                                                           >
+                                                           WGS Volleyball/Tennis Court</option>
+                                                                                                               <option value="44"
+                                                           >
+                                                           Mixed Gym - Awsaj</option>
+                                                                                                               <option value="45"
+                                                           >
+                                                           Multi-Purpose Court - Awsaj</option>
+                                                                                                               <option value="49"
+                                                           >
+                                                           Multaqa</option>
+                                                                                                               <option value="51"
+                                                           >
+                                                           Oxygen Park</option>
+                                                                                                               <option value="53"
+                                                           >
+                                                           Raslaffan Studio - Clubhouse</option>
+                                                                                                               <option value="54"
+                                                           >
+                                                           Basketball Court - Multaqa</option>
+                                                                                                               <option value="56"
+                                                           >
+                                                           Tennis Courts - Clubhouse</option>
+                                                                                                               <option value="58"
+                                                           >
+                                                           Squash Courts - Clubhouse</option>
+                                                                                                               <option value="62"
+                                                           >
+                                                           Games Room - Clubhouse</option>
+                                                                                                               <option value="65"
+                                                           >
+                                                           Multi-Purpose Court - Clubhouse</option>
+                                                                                                               <option value="68"
+                                                           >
+                                                           Clubhouse Messaeid Room</option>
+                                                                                                               <option value="71"
+                                                           >
+                                                           Mini Pitch - Clubhouse</option>
+                                                                                                               <option value="74"
+                                                           >
+                                                           Multi-Purpose Court 1 - QAW</option>
+                                                                                                               <option value="75"
+                                                           >
+                                                           Multi-Purpose Court 2 - QAW</option>
+                                                                                                               <option value="77"
+                                                           >
+                                                           Male Gym - QAW</option>
+                                                                                                               <option value="79"
+                                                           >
+                                                           Ladies Gym - QAW</option>
+                                                                                                               <option value="83"
+                                                           >
+                                                           Competition Pool - QAW</option>
+                                                                                                               <option value="85"
+                                                           >
+                                                           Learner Pool - QAW</option>
+                                                                                                               <option value="88"
+                                                           >
+                                                           Football Pitch - QAW</option>
+                                                                                                               <option value="89"
+                                                           >
+                                                           Ladies Gym - Multaqa</option>
+                                                                                                               <option value="90"
+                                                           >
+                                                           Male Gym - Multaqa</option>
+                                                                                                               <option value="91"
+                                                           >
+                                                           QAW Outdoor Jump and Track Field</option>
+                                                                                                               <option value="95"
+                                                           >
+                                                           Volleyball Court - QAW</option>
+                                                                                                               <option value="96"
+                                                           >
+                                                           Basketball Court - QAW</option>
+                                                                                                               <option value="99"
+                                                           >
+                                                           Oxygen Park - Beach Volleyball 2</option>
+                                                                                                               <option value="115"
+                                                           >
+                                                           Multi-Purpose Court 2 - QAK</option>
+                                                                                                               <option value="116"
+                                                           >
+                                                           Multi-Purpose Court 1 - QAK</option>
+                                                                                                               <option value="117"
+                                                           >
+                                                           Skate Park - Awsaj Academy</option>
+                                                                                                               <option value="122"
+                                                           >
+                                                           Football/Badminton Court - Multaqa</option>
+                                                                                                               <option value="123"
+                                                           >
+                                                           Education City Gift Shop (ECGS)</option>
+                                                                                                               <option value="125"
+                                                           >
+                                                           Football Pitch 2</option>
+                                                                                                               <option value="126"
+                                                           >
+                                                           Football Pitch 3</option>
+                                                                                                               <option value="131"
+                                                           >
+                                                           Oxygen Park - Beach Volleyball 1</option>
+                                                                                                               <option value="166"
+                                                           >
+                                                           Al Shaqab</option>
+                                                                                                               <option value="167"
+                                                           >
+                                                           Education City Golf Club</option>
+                                                                                                               <option value="169"
+                                                           >
+                                                           Education City Mosque</option>
+                                                                                                               <option value="170"
+                                                           >
+                                                           Qatar National Library</option>
+                                                                                                               <option value="171"
+                                                           >
+                                                           Volleyball Court - Multaqa</option>
+                                                                                                               <option value="175"
+                                                           >
+                                                           Swimming Pool - Awsaj</option>
+                                                                                                               <option value="185"
+                                                           >
+                                                           Ceremonial Court</option>
+                                                                                                               <option value="186"
+                                                           >
+                                                           Ceremonial Green Spine</option>
+                                                                                                               <option value="187"
+                                                           >
+                                                           Mathaf: Arab Museum of Modern Art</option>
+                                                                                                               <option value="188"
+                                                           >
+                                                           Liberal Arts &amp; Science Building</option>
+                                                                                                               <option value="190"
+                                                           >
+                                                           Minaretein Center (EC Mosque)</option>
+                                                                                                               <option value="191"
+                                                           >
+                                                           Qatar Foundation Headquarters</option>
+                                                                                                               <option value="193"
+                                                           >
+                                                           Swimming Pool - Clubhouse</option>
+                                                                                                               <option value="194"
+                                                           >
+                                                           Mixed Gym - Clubhouse</option>
+                                                                                                               <option value="195"
+                                                           >
+                                                           Chef&#039;s Garden - Marwan Club</option>
+                                                                                                               <option value="197"
+                                                           >
+                                                           Northwestern University in Qatar</option>
+                                                                                                               <option value="198"
+                                                           >
+                                                           Qatar Nanny Training Academy</option>
+                                                                                                               <option value="200"
+                                                           >
+                                                           Qatar Diabetes Association</option>
+                                                                                                               <option value="201"
+                                                           >
+                                                           Qatar Academy Sidra</option>
+                                                                                                               <option value="202"
+                                                           >
+                                                           Qatar Academy for Science and Technology (QAST)</option>
+                                                                                                               <option value="203"
+                                                           >
+                                                           Education City Tram</option>
+                                                                                                               <option value="204"
+                                                           >
+                                                           Virginia Commonwealth University School of the Arts in Qatar</option>
+                                                                                                               <option value="205"
+                                                           >
+                                                           Marwan Club</option>
+                                                                                                               <option value="217"
+                                                           >
+                                                           Olympic Pool - Recreation Centre</option>
+                                                                                                               <option value="225"
+                                                           >
+                                                           The Media Majlis</option>
+                                                                                                               <option value="227"
+                                                           >
+                                                           Seeroo fi al ardh</option>
+                                                                                                               <option value="229"
+                                                           >
+                                                           Pre University Education HQ</option>
+                                                                                                               <option value="234"
+                                                           >
+                                                           Male Spa - Clubhouse</option>
+                                                                                                               <option value="235"
+                                                           >
+                                                           Ladies Spa - Clubhouse</option>
+                                                                                                               <option value="264"
+                                                           >
+                                                           Georgetown University in Qatar</option>
+                                                                                                               <option value="265"
+                                                           >
+                                                           Qur&#039;anic Botanic Garden</option>
+                                                                                                               <option value="267"
+                                                           >
+                                                           Tariq Bin Ziad Recreation</option>
+                                                                                                               <option value="268"
+                                                           >
+                                                           Education City Golf Club</option>
+                                                                                                               <option value="270"
+                                                           >
+                                                           Education City Stadium</option>
+                                                                                                               <option value="277"
+                                                           >
+                                                           Sidra Village</option>
+                                                                                                               <option value="280"
+                                                           >
+                                                           Awsaj Academy</option>
+                                                                                                               <option value="281"
+                                                           >
+                                                           Qatar National Convention Centre</option>
+                                                                                                               <option value="282"
+                                                           >
+                                                           Education City Mountain Bike Trail</option>
+                                                                                                               <option value="283"
+                                                           >
+                                                           Carnegie Mellon University in Qatar</option>
+                                                                                                               <option value="284"
+                                                           >
+                                                           Al Shaqab Parking</option>
+                                                                                                               <option value="285"
+                                                           >
+                                                           Al Mujadilah Center and Mosque for Woman</option>
+                                                                                                               <option value="287"
+                                                           >
+                                                           Sidra Medicine</option>
+                                                                                                               <option value="288"
+                                                           >
+                                                           Qatar Academy Doha</option>
+                                                                                                               <option value="289"
+                                                           >
+                                                           ThinkBay</option>
+                                                                                                               <option value="291"
+                                                           >
+                                                           The Dome</option>
+                                                                                                               <option value="292"
+                                                           >
+                                                           The Dome</option>
+                                                                                                       </select>
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field render">
+                                               <label>Start Date</label>
+                                               <input class="form-control search_start_date  txtDate-en " type="date"
+                                                      placeholder="  mm/dd/yy " name="class_start_date"
+                                                      value="">
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group search-field render">
+                                               <label>End Date</label>
+                                               <input class="form-control search_end_date   txtDate-en " type="date"
+                                                      placeholder="  mm/dd/yy " name="class_end_date"
+                                                      value="" >
+                                           </div>
+                                       </div>
+
+                
+
+                                       <div class="col-sm-6"></div>
+
+                                       <div class="search-btn col-sm-12 pt-1 order-2 order-xl-0">
+                                           <button type="submit"
+                                                   class="btn btn-primary search-btn w-100 mt-xl-4 mb-2 mb-xl-0">Search</button>
+                                       </div>
+
+                                   </div>
+
+                               </div>
+                           </div>
+
+                           
+                                      
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+                                
+                            </form>
+                        </div>
+    
+                    </div>
+                    <!--subtags -->
+                    <h4 class="text-primary"></h4>
+                                    <!--minitags -->
+                </div>
+            </div>
+
+
+  <!-- Container -->
+  <div id="search-result-container">
+    <section class="pt-4 pt-md-5 pb-3 membershipNew-sec">
+     <div class="container-lg pt-0 pt-xl-4">
+      <div class="row align-items-center justify-content-between mb-4 mb-xl-5">
+       <div class="col-12 col-sm">
+      </div>
+      <div class="col-auto page-count-select">
+       <div class="">
+       <select class="btn-perpage kt-select2" id="per_page" name="per_page" placeholder="">
+        <option selected value="8">8 Per page</option>
+        <option value="16">16 Per page</option>
+       </select>
+       <select class="btn-perpage kt-select2" id="sort_by" name="sort_by" placeholder="">
+        <option selected value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <div class="row gx-2 gy-2 search-list pb-xl-5">
+
+    {% for class in classes %}
+     <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="list-item-bordered activity-item offerings">
+       <div class="list-item mx-2 mb-3 membershipNew-items">
+        <figure>
+         <a  href="{{ class.activity_image.url}}" >
+          <img class="img-fluid "
+           src="{{ class.activity_image.url}}"
+          alt="" />
+         </a>
+        </figure>
+        <div class="content-holder">
+         <div class="d-flex align-items-center justify-content-between">
+          <div class="mem-content membershipNew-content">
+           <h5 class="text-white text-capitalize mbe-0">{{ class.classes_names }}</h5>
+           <div class="card-text text-white">{{ class.start_date}}{{ class.end_date }}</div>
+           <div  class="text-white card-text centre">
+            <i class="fa fa-map-marker-alt pe-3"></i>{{ class.landmark }}
+           </div>
+          </div>
+         </div>
+         <!-- hover -->
+         <div class="activity-wrappers">
+          <div class="list-btn-holder gap-2 activity-hover">
+           <a class="btn btn-primary bg-white btn-list text-primary bg-hover-primary" href="https://educationcity.qa/event/bruckner-meets-mozart" role="button">View Details</a>
+           <a class="btn btn-outline-primary btn-list wish-list-button" name="event" id="1330" title="Add to wishlist" role="add" tabindex="0"><i class="bi bi-bookmark-dash"></i></a>
+           <a class="btn btn-outline-primary btn-list share-button" title="Bruckner Meets Mozart" name="https://educationcity.qa/event/bruckner-meets-mozart" role="button"><i class="bi bi-reply d-block flip-90"></i></a>
+          </div>
+         </div>
+        </div>
+ 
+       </div>
+      </div>
+     </div>
+    {% endfor %}
+ </section>
+ <div class="container-lg py-5">
+  <ul class="pagination justify-content-center">
+   
+      <li class="disabled d-none"><i class="bi bi-chevron-left"></i></li>
+   
+                 <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=2">2</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=3">3</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=4">4</a></li>
+            
+   
+         <li class="page-item">
+     <a class="page-link" href="https://educationcity.qa/events?page=2" rel="next" aria-label="Next &raquo;"><i class="bi bi-chevron-right"></i></a>
+    </li>
+ 
+    </ul>
+ 
+ 
+ </div>
+ <div class="modal fade" id="social-share-modal" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered page-modal" role="document">
+   <div class="modal-content">
+    <div class="modal-body p-4">
+ 
+     <h5 class="modal-title" id="interestedModalLabel">Share</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     <div class="modal-body text-center">
+      <div class="inner inner-center" id="shareable_content">
+ 
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ 
+ 
+   </div>
+   <main class="main-wrapper">
+  </div>
+  </div>
+  
+  {% endblock %}

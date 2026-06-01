@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+        <!-- begin:: Content -->
+            <style>
+        .select2-selection--multiple{
+            overflow: hidden !important;
+            height: auto !important;
+        }
+    </style>
+    <div class="activity-wrapper search-result-wrapper">
+        <div class="container-lg py-md-5 py-3">
+            <div class="search-container">
+                <div class="header-top">
+                                        
+                    <input type="hidden" value="" id="things_to_do_ids" />
+                    <div>
+                        <h1 class="text-primary mb-3">Offerings</h1>
+                        <p>There's always something to do when you’re in Education City.</p>
+                    </div>
+                    
+                </div>
+                <div class="search-filter0 search-block show" id="collapseExample">
+                    <ul class="nav  gap-1 search-top-nav search-result-top-nav" id="myTab" role="tablist">
+
+                        <li class="nav-item" role="presentation" data-search_type='all'>
+                            <a href="/search_all" class="btn btn-spotlight active " >All</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='event'>
+                            <a href='/search_event' class="btn btn-spotlight ">Events</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='venue'>
+                            <a href='/search_venue' class="btn btn-spotlight ">Venues</a>
+                        </li>
+                        <li class="nav-item" role="presentation" data-search_type='class'>
+                            <a href='/search_class' class="btn btn-spotlight ">Classes</a>
+                        </li>
+                    </ul>
+     
+                          
+
+                    <div class="form">
+                        <form name="searchResultForm" id="searchResultForm" method="POST" >
+                            {% csrf_token %} 
+                            <div class="tab-content" id="searchResultTabContent">
+
+
+
+<div class="tab-pane fade active show "
+                                     id="result-venue-tab" role="tabpanel" aria-labelledby="result-venues">
+                                    <div class="form activities-new">
+                                        <div class="row gx-2 mt-4 row-cols-xl-5">
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field">
+                                                    <label>Search</label>
+                                                    <input type="text" class="form-control search-form"
+                                                           id="result_all_search_key" aria-describedby="search"
+                                                           name='all_search_key'
+                                                           value=""
+                                                           placeholder="Eg: Education City Student Center">
+                                                </div>
+                                            </div>
+
+                                            
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field render">
+                                                    <label>Select Date</label>
+                                                    <input class="form-control  txtDate-en " type="date" name="all_start_date"
+                                                           placeholder="  dd/mm/yy ">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group search-field">
+                                                                                                        <label>Select Time</label>
+                                                    <input class="form-control kt-select2" name="all_start_time"
+                                                                      placeholder=" HH:mm am/pm">
+                                                        {% comment %} <option value="">Select</option>
+                                                                                                                                                                                                                                                                                                                <option value="12 AM - 06 AM"
+                                                                    >
+                                                                    12 AM - 06 AM</option>
+                                                                                                                                                                                                                                                                                                                                                                            <option value="06 AM - 12 PM"
+                                                                    >
+                                                                    06 AM - 12 PM</option>
+                                                                                                                                                                                                                                                                                                                                                                            <option value="12 PM - 06 PM"
+                                                                    >
+                                                                    12 PM - 06 PM</option>
+                                                                                                                                                                                                                                                                                                                                                                            <option value="06 PM - 12 AM"
+                                                                    >
+                                                                    06 PM - 12 AM</option>
+                                                                                                                                                                                                                                                                                                                                                        </select>
+                                                {% endcomment %}
+                                            </div>
+                                            </div>
+
+                                            <div class="search-btn col-sm-12 pt-1 order-2 order-xl-0">
+                                                <button type="submit"
+                                                        class="btn btn-primary search-btn w-100 mt-xl-4 mb-2 mb-xl-0">Search</button>
+                                            </div>
+
+                                        
+
+        
+                                    </div>
+                                    
+                                </form>
+                            </div>
+        
+                        </div>
+                        <!--subtags -->
+                        <h4 class="text-primary"></h4>
+                                        <!--minitags -->
+                    </div>
+                </div>
+
+
+
+
+  <!-- Container -->
+  <div id="search-result-container">
+    <section class="pt-4 pt-md-5 pb-3 membershipNew-sec">
+     <div class="container-lg pt-0 pt-xl-4">
+      <div class="row align-items-center justify-content-between mb-4 mb-xl-5">
+       <div class="col-12 col-sm">
+      </div>
+      <div class="col-auto page-count-select">
+       <div class="">
+       <select class="btn-perpage kt-select2" id="per_page" name="per_page" placeholder="">
+        <option selected value="8">8 Per page</option>
+        <option value="16">16 Per page</option>
+       </select>
+       <select class="btn-perpage kt-select2" id="sort_by" name="sort_by" placeholder="">
+        <option selected value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <div class="row gx-2 gy-2 search-list pb-xl-5">
+    {% for one in all %}
+     <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="list-item-bordered activity-item offerings">
+       <div class="list-item mx-2 mb-3 membershipNew-items">
+        <figure>
+         <a  href="{{ one.activity_image.url }}" >
+          <img class="img-fluid "
+           src="{{ one.activity_image.url }}"
+          alt="" />
+         </a>
+        </figure>
+        <div class="content-holder">
+         <div class="d-flex align-items-center justify-content-between">
+          <div class="mem-content membershipNew-content">
+           <h5 class="text-white text-capitalize mbe-0">{% if one.activityname %} {{one.activityname}} {% else %}  {{one.classes_names}} {% endif %}</h5>
+           <div class="card-text text-white">{{one.start_date}} - {{one.end_date}} </div>
+           <div class="card-text text-white">{{ one.start_time }} - {{ one.end_time }}</div>
+           <div  class="text-white card-text centre">
+            <i class="fa fa-map-marker-alt pe-3"></i>{{ one.landmark }}
+           </div>
+          </div>
+         </div>
+         <!-- hover -->
+        <div class="activity-wrappers">
+          <div class="list-btn-holder gap-2 activity-hover">
+           <a class="btn btn-primary bg-white btn-list text-primary bg-hover-primary" href="https://educationcity.qa/event/bruckner-meets-mozart" role="button">Book Tickets</a>
+           <a class="btn btn-outline-primary btn-list wish-list-button" name="event" id="1330" title="Add to wishlist" role="add" tabindex="0"><i class="bi bi-bookmark-dash"></i></a>
+           <a class="btn btn-outline-primary btn-list share-button" title="Bruckner Meets Mozart" name="https://educationcity.qa/event/bruckner-meets-mozart" role="button"><i class="bi bi-reply d-block flip-90"></i></a>
+          </div>
+         </div>
+        </div>
+ 
+       </div>
+      </div>
+     </div>
+    
+    {% endfor %}
+
+    
+ </section>
+ <div class="container-lg py-5">
+  <ul class="pagination justify-content-center">
+   
+      <li class="disabled d-none"><i class="bi bi-chevron-left"></i></li>
+   
+                 <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=2">2</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=3">3</a></li>
+                      <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=4">4</a></li>
+            
+   
+         <li class="page-item">
+     <a class="page-link" href="https://educationcity.qa/events?page=2" rel="next" aria-label="Next &raquo;"><i class="bi bi-chevron-right"></i></a>
+    </li>
+ 
+    </ul>
+ 
+ 
+ </div>
+ <div class="modal fade" id="social-share-modal" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered page-modal" role="document">
+   <div class="modal-content">
+    <div class="modal-body p-4">
+ 
+     <h5 class="modal-title" id="interestedModalLabel">Share</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     <div class="modal-body text-center">
+      <div class="inner inner-center" id="shareable_content">
+ 
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ 
+ 
+   </div>
+   <main class="main-wrapper">
+  </div>
+  </div>
+   
+  
+  {% endblock %}

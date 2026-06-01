@@ -1,0 +1,454 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+  <!-- begin:: Content -->
+   <style>
+  .select2-selection--multiple{
+   overflow: hidden !important;
+   height: auto !important;
+  }
+ </style>
+ <div class="activity-wrapper search-result-wrapper">
+  <div class="container-lg py-md-5 py-3">
+   <div class="search-container">
+    <div class="header-top">
+          
+     <input type="hidden" value="" id="things_to_do_ids" />
+     <div>
+      <h1 class="text-primary mb-3">Offerings</h1>
+      <p>There's always something to do when you’re in Education City.</p>
+     </div>
+     
+    </div>
+    <div class="search-filter0 search-block show" id="collapseExample">
+     <ul class="nav  gap-1 search-top-nav search-result-top-nav" id="myTab" role="tablist">
+
+      <li class="nav-item" role="presentation" data-search_type='all'>
+       <a href="/search_all" class="btn btn-spotlight " >All</a>
+      </li>
+      <li class="nav-item" role="presentation" data-search_type='event'>
+       <a href='/search_event' class="btn btn-spotlight active">Events</a>
+      </li>
+      <li class="nav-item" role="presentation" data-search_type='venue'>
+       <a href='/search_venue' class="btn btn-spotlight ">Venues</a>
+      </li>
+      <li class="nav-item" role="presentation" data-search_type='class'>
+       <a href='/search_class' class="btn btn-spotlight ">Classes</a>
+      </li>
+     </ul>
+  
+      
+      
+      
+      
+
+     <div class="form">
+      <form name="searchResultForm" id="searchResultForm" method="POST">
+        {% csrf_token %}
+       <div class="tab-content" id="searchResultTabContent">        
+        <div class="tab-pane fade active show"
+          id="result-event-tab" role="tabpanel" aria-labelledby="result-events">
+         <div class="form activities-new">
+          <div class="row gx-2 mt-4 row-cols-xl-5">
+           <div class="col-sm-6">
+            <div class="form-group search-field">
+             <label>Search</label>
+             <input type="text" class="form-control search-form"
+                 aria-describedby="result_event_search_key" name='event_search_key'
+                 value=""
+                 placeholder="Eg: Education City Student Center">
+            </div>
+           </div>
+           <div class="col-sm-6">
+            <div class="form-group things-to-do search-field">
+
+             <label>Things to do </label>
+             <select class="form-select kt-select2" type="text"
+               name="event_things_to_do[]" id="result_event_things_to_do"
+               multiple="multiple" data-placeholder="Select">
+               <option value="Health and Wellness">Health and Wellness</option>
+               <option value="Sports and Fitness">Sports and Fitness</option>
+               <option value="Arts and Culture">Arts and Culture</option>
+               <option value="Research and Innovation">Research and Innovation</option>
+               <option value="Talks and Lectures">Talks and Lectures</option>
+               <option value="Education">Education</option>
+               <option value="Kids and Families">Kids and Families</option>
+               <option value="Ladies Only">Ladies Only</option>
+               <option value="Community">Community</option>
+             </select>
+
+            </div>
+           </div>
+           <div class="col-sm-6">
+            <div class="form-group search-field">
+             <label>Event Type</label>
+             <select class="form-select kt-select2" name="event_type"
+               id="result_event_type">
+               <option value="">Select</option>
+               <option value="Convocation">Convocation</option>
+               <option value="Campaign">Campaign</option>
+               <option value="Discussion">Discussion</option>
+               <option value="Competition">Competition</option>
+               <option value="Workshop">Workshop</option>
+               <option value="Lecture">Lecture</option>
+               <option value="Activities">Activities</option>
+               <option value="Concert">Concert</option>
+               <option value="Tour">Tour</option>
+               <option value="Exhibition">Exhibition</option>
+               <option value="Family Events">Family Events</option>
+               <option value="Conference">Conference</option>
+             </select>
+            </div>
+           </div>
+
+           <div class="col-sm-6">
+            <div class="form-group search-field">
+
+             <label>Landmark &amp; Building</label>
+             <select class="form-select kt-select2" name="event_landmark"
+               placeholder="Select">
+               <option value="">Select</option>
+               <option value="Qatar Academy Al Khor">Qatar Academy Al Khor</option>
+               <option value="Competition Pool - QAK">Competition Pool - QAK</option>
+               <option value="Learner Pool - QAK">Learner Pool - QAK</option>
+               <option value="Qatar Academy Al Wakrah">Qatar Academy Al Wakrah</option>
+               <option value="Male Gym - QAK">Male Gym - QAK</option>
+               <option value="Ladies Gym - QAK">Ladies Gym - QAK</option>
+               <option value="Awsaj Recreation">Awsaj Recreation</option>
+               <option value="Qatar Academy Msheireb">Qatar Academy Msheireb</option>
+               <option value="Recreation Centre">Recreation Centre</option>
+               <option value="Education City Club House">Education City Club House</option>
+               <option value="AaQool Atrium - Recreation Centre">AaQool Atrium - Recreation Centre</option>
+               <option value="Shafallah Conference Room - Recreation Centre">Shafallah Conference Room - Recreation Centre</option>
+               <option value="Football Pitch - QAK">Football Pitch - QAK</option>
+               <option value="Basketball Court - QAK">Basketball Court - QAK</option>
+               <option value="Studio Room - QAK">Studio Room - QAK</option>
+               <option value="Volleyball Court - QAK">Volleyball Court - QAK</option>
+               <option value="Running Track - QAK">Running Track - QAK</option>
+               <option value="QAM Multi-Purpose Court">QAM Multi-Purpose Court</option>
+               <option value="QAM Studio Room">QAM Studio Room</option>
+               <option value="Green Floor Court - Recreation Centre">Green Floor Court - Recreation Centre</option>
+               <option value="Gymnastics Room - Recreation Centre">Gymnastics Room - Recreation Centre</option>
+               <option value="Studio Room - Recreation Centre">Studio Room - Recreation Centre</option>
+               <option value="Squash Court - Recreation Centre">Squash Court - Recreation Centre</option>
+               <option value="Training Pool - Recreation Centre">Training Pool - Recreation Centre</option>
+               <option value="Splash Pool - Recreation Centre">Splash Pool - Recreation Centre</option>
+               <option value="Mixed Gym - Recreation Centre">Mixed Gym - Recreation Centre</option>
+               <option value="Ladies Gym - Recreation Centre">Ladies Gym - Recreation Centre</option>
+               <option value="Basketball Court - Awsaj">Basketball Court - Awsaj</option>
+               <option value="Football Court - Awsaj">Football Court - Awsaj</option>
+               <option value="WGS Volleyball/Tennis Court">WGS Volleyball/Tennis Court</option>
+               <option value="Mixed Gym - Awsaj">Mixed Gym - Awsaj</option>
+               <option value="Multi-Purpose Court - Awsaj">Multi-Purpose Court - Awsaj</option>
+               <option value="Multaqa">Multaqa</option>
+               <option value="Oxygen Park">Oxygen Park</option>
+               <option value="Raslaffan Studio - Clubhouse">Raslaffan Studio - Clubhouse</option>
+               <option value="Basketball Court - Multaqa">Basketball Court - Multaqa</option>
+               <option value="Tennis Courts - Clubhouse">Tennis Courts - Clubhouse</option>
+               <option value="Squash Courts - Clubhouse">Squash Courts - Clubhouse</option>
+               <option value="Games Room - Clubhouse">Games Room - Clubhouse</option>
+               <option value="Multi-Purpose Court - Clubhouse">Multi-Purpose Court - Clubhouse</option>
+               <option value="Clubhouse Messaeid Room">Clubhouse Messaeid Room</option>
+               <option value="ini Pitch - Clubhouse">Mini Pitch - Clubhouse</option>
+               <option value="Multi-Purpose Court 1 - QAW">Multi-Purpose Court 1 - QAW</option>
+               <option value="Multi-Purpose Court 2 - QAW">Multi-Purpose Court 2 - QAW</option>
+               <option value="Male Gym - QAW">Male Gym - QAW</option>
+               <option value="Ladies Gym - QAW">Ladies Gym - QAW</option>
+               <option value="Competition Pool - QAW">Competition Pool - QAW</option>
+               <option value="Learner Pool - QAW">Learner Pool - QAW</option>
+               <option value="Football Pitch - QAW">Football Pitch - QAW</option>
+               <option value="Ladies Gym - Multaqa">Ladies Gym - Multaqa</option>
+               <option value="Male Gym - Multaqa">Male Gym - Multaqa</option>
+               <option value="QAW Outdoor Jump and Track Field">QAW Outdoor Jump and Track Field</option>
+               <option value="Volleyball Court - QAW">Volleyball Court - QAW</option>
+               <option value="Basketball Court - QAW">Basketball Court - QAW</option>
+               <option value="Oxygen Park - Beach Volleyball 2">Oxygen Park - Beach Volleyball 2</option>
+               <option value="Multi-Purpose Court 2 - QAK">Multi-Purpose Court 2 - QAK</option>
+               <option value="Multi-Purpose Court 1 - QAK">Multi-Purpose Court 1 - QAK</option>
+               <option value="Skate Park - Awsaj Academy">Skate Park - Awsaj Academy</option>
+               <option value="Football/Badminton Court - Multaqa">Football/Badminton Court - Multaqa</option>
+               <option value="Education City Gift Shop (ECGS)">Education City Gift Shop (ECGS)</option>
+               <option value="Football Pitch 2">Football Pitch 2</option>
+               <option value="Football Pitch 3">Football Pitch 3</option>
+               <option value="Oxygen Park - Beach Volleyball 1">Oxygen Park - Beach Volleyball 1</option>
+               <option value="Al Shaqab">Al Shaqab</option>
+               <option value="Education City Golf Club">Education City Golf Club</option>
+               <option value="Education City Mosque">Education City Mosque</option>
+               <option value="Qatar National Library">Qatar National Library</option>
+               <option value="Volleyball Court - Multaqa">Volleyball Court - Multaqa</option>
+               <option value="Swimming Pool - Awsaj">Swimming Pool - Awsaj</option>
+               <option value="Ceremonial Court">Ceremonial Court</option>
+               <option value="Ceremonial Green Spine">Ceremonial Green Spine</option>
+               <option value="Mathaf: Arab Museum of Modern Art">Mathaf: Arab Museum of Modern Art</option>
+               <option value="Liberal Arts & Science Building">Liberal Arts &amp; Science Building</option>
+               <option value="Minaretein Center (EC Mosque)">Minaretein Center (EC Mosque)</option>
+               <option value="Qatar Foundation Headquarters">Qatar Foundation Headquarters</option>
+               <option value="Swimming Pool - Clubhouse">Swimming Pool - Clubhouse</option>
+               <option value="Mixed Gym - Clubhouse">Mixed Gym - Clubhouse</option>
+               <option value="Chef's Garden - Marwan Club">Chef&#039;s Garden - Marwan Club</option>
+               <option value="Northwestern University in Qatar">Northwestern University in Qatar</option>
+               <option value="Qatar Nanny Training Academy">Qatar Nanny Training Academy</option>
+               <option value="Qatar Diabetes Association">Qatar Diabetes Association</option>
+               <option value="Qatar Academy Sidra">Qatar Academy Sidra</option>
+               <option value="Qatar Academy for Science and Technology (QAST)">Qatar Academy for Science and Technology (QAST)</option>
+               <option value="Education City Tram">Education City Tram</option>
+               <option value="Virginia Commonwealth University School of the Arts in Qatar">Virginia Commonwealth University School of the Arts in Qatar</option>
+               <option value="Marwan Club">Marwan Club</option>
+               <option value="Olympic Pool - Recreation Centre">Olympic Pool - Recreation Centre</option>
+               <option value="The Media Majlis">The Media Majlis</option>
+               <option value="Seeroo fi al ardh">Seeroo fi al ardh</option>
+               <option value="Pre University Education HQ">Pre University Education HQ</option>
+               <option value="Male Spa - Clubhouse">Male Spa - Clubhouse</option>
+               <option value="Ladies Spa - Clubhouse">Ladies Spa - Clubhouse</option>
+               <option value="Georgetown University in Qatar">Georgetown University in Qatar</option>
+               <option value='Qur&#039;anic Botanic Garden'>Qur&#039;anic Botanic Garden</option>
+               <option value="Tariq Bin Ziad Recreation">Tariq Bin Ziad Recreation</option>
+               <option value="Education City Golf Club">Education City Golf Club</option>
+               <option value="Education City Stadium">Education City Stadium</option>
+               <option value="Sidra Village">Sidra Village</option>
+               <option value="Awsaj Academy">Awsaj Academy</option>
+               <option value="Qatar National Convention Centre">Qatar National Convention Centre</option>
+               <option value="Education City Mountain Bike Trail">Education City Mountain Bike Trail</option>
+               <option value="Carnegie Mellon University in Qatar">Carnegie Mellon University in Qatar</option>
+               <option value="Al Shaqab Parking">Al Shaqab Parking</option>
+               <option value="Al Mujadilah Center and Mosque for Woman">Al Mujadilah Center and Mosque for Woman</option>
+               <option value="Sidra Medicine">Sidra Medicine</option>
+               <option value="Qatar Academy Doha">Qatar Academy Doha</option>
+               <option value="ThinkBay">ThinkBay</option>
+               <option value="The Dome">The Dome</option>
+               <option value="The Dome">The Dome</option>
+             </select>
+
+            </div>
+           </div>
+
+           <div class="col-sm-6">
+            <div class="form-group search-field render">
+
+             <label>Start Date</label>
+             <input class="form-control search_start_date  txtDate-en " type="date"
+                 placeholder="  mm/dd/yy " name="event_start_date"
+                 value="" >
+
+            </div>
+           </div>
+
+           <div class="col-sm-6">
+            <div class="form-group search-field render">
+             <label>End Date</label>
+             <input class="form-control search_end_date  txtDate-en " type="date" placeholder="  mm/dd/yy "
+                 value=""
+                 name="event_end_date" >
+
+            </div>
+           </div>        
+
+           <div class="col-sm-6">
+            <div class="form-group search-field">
+             {% comment %} <label>Type</label>
+
+             <div class="form-group search-field search-form-checkbox pt-2">
+              <div class="form-check custom-check term-check form-check-inline">
+               <input class="form-check-input mr-4" id="result_event_free"
+                   name="event_free" type="checkbox"
+                   
+                   value="1" readonly="">
+               <label class="form-check-label"
+                   for="result_event_free">Free </label>
+              </div>
+              <div class="form-check custom-check term-check form-check-inline">
+               <input class="form-check-input" id="result_event_paid"
+                   name="event_paid" type="checkbox" value="1"
+                   
+                   readonly="">
+               <label class="form-check-label"
+                   for="result_event_paid">Paid</label>
+              </div>
+             </div> {% endcomment %}
+            </div>
+           </div>
+
+           <div class="col-sm-6">
+            <div class="form-group search-field">
+
+             {% comment %} <label>Gender</label> {% endcomment %}
+             <div class="search-form-checkbox mt-1">
+              {% comment %} <div class="form-check custom-check term-check form-check-inline">
+               <input class="form-check-input mr-4" id="result_event_male"
+                   name="event_gender_male" type="checkbox" value="Male"
+                   
+                   readonly="">
+               <label class="form-check-label"
+                   for="result_event_male">Male </label>
+              </div>
+              <div class="form-check custom-check term-check form-check-inline">
+               <input class="form-check-input" id="result_event_female"
+                   name="event_gender_female" type="checkbox" value="Female"
+                   
+                   readonly="">
+               <label class="form-check-label"
+                   for="result_event_female">Female</label>
+              </div> {% endcomment %}
+             </div>
+
+            </div>
+           </div>
+
+           <div class="col-sm-6"></div>
+
+           <div class="search-btn col-sm-12 pt-1 order-2 order-xl-0 ms-xl-auto">
+            <button type="submit"
+              class="btn btn-primary search-btn w-100 mt-xl-4 mb-2 mb-xl-0">Search</button>
+           </div>
+
+          </div>
+
+         </div>
+
+        </div>
+
+       </div>
+       
+      </form>
+     </div>
+
+    </div>
+    <!--subtags -->
+    <h4 class="text-primary"></h4>
+        <!--minitags -->
+   </div>
+  </div>
+
+
+  <!-- Container -->
+  <div id="search-result-container">
+   <section class="pt-4 pt-md-5 pb-3 membershipNew-sec">
+    <div class="container-lg pt-0 pt-xl-4">
+     <div class="row align-items-center justify-content-between mb-4 mb-xl-5">
+      <div class="col-12 col-sm">
+     </div>
+     <div class="col-auto page-count-select">
+      <div class="">
+      <select class="btn-perpage kt-select2" id="per_page" name="per_page" placeholder="">
+       <option selected value="8">8 Per page</option>
+       <option value="16">16 Per page</option>
+      </select>
+      <select class="btn-perpage kt-select2" id="sort_by" name="sort_by" placeholder="">
+       <option selected value="newest">Newest</option>
+       <option value="oldest">Oldest</option>
+      </select>
+     </div>
+    </div>
+   </div>
+  
+     
+        {% comment %} <figure>
+          <a  href="https://educationcity.qa/event/bruckner-meets-mozart" >
+           <img class="img-fluid "
+            src="https://cdn.educationcity.qa/uploads/17440/663a02ca41c29_QF_May24.jpg"
+           alt="" />
+          </a>
+         </figure> {% endcomment %}
+      
+       {% comment %} <div class="content-holder">
+        <div class="d-flex align-items-center justify-content-between">
+         <div class="mem-content membershipNew-content">
+          <h5 class="text-white text-capitalize mbe-0">Bruckner Meets Mozart</h5>
+          <div class="card-text text-white">Friday, 24 May 2024 , 7:30pm-9:30pm</div>
+          <div  class="text-white card-text centre">
+           <i class="fa fa-map-marker-alt pe-3"></i>Qatar National Convention Centre
+          </div>
+         </div>
+        </div> {% endcomment %}
+        <div class="row gx-2 gy-2 search-list pb-xl-5">
+
+      {% for event in events %}
+         <div class="col-xl-4 col-lg-4 col-sm-6">
+            <div class="list-item-bordered activity-item offerings">
+
+            <div class="list-item mx-2 mb-3 membershipNew-items">
+            <figure>
+              <a  href="{{ event.activity_image.url }}" >
+              <img class="img-fluid "
+                src="{{ event.activity_image.url }}"
+              alt="" />
+              </a>
+            </figure>
+
+            <div class="content-holder">
+              <div class="d-flex align-items-center justify-content-between">
+              <div class="mem-content membershipNew-content">
+                <h5 class="text-white text-capitalize mbe-0">{{ event.activityname}} </h5>
+                <div class="card-text text-white">{{ event.start_date }}{{ event.end_date }}</div>
+                <div  class="text-white card-text centre">
+                <i class="fa fa-map-marker-alt pe-3"></i>{{ event.landmark }}
+                {% comment %} <h5>{{ event.event_names }}event name</h5>
+                <h5>{{ event.start_date }}start date/ {{ event.end_date }} end date</h5> {% endcomment %}
+                            
+                </div>
+              </div>
+              </div>
+          <div class="activity-wrappers">
+            <div class="list-btn-holder gap-2 activity-hover">
+             <a class="btn btn-primary bg-white btn-list text-primary bg-hover-primary" href="https://educationcity.qa/event/bruckner-meets-mozart" role="button">View Details</a>
+             <a class="btn btn-outline-primary btn-list wish-list-button" name="event" id="1330" title="Add to wishlist" role="add" tabindex="0"><i class="bi bi-bookmark-dash"></i></a>
+             <a class="btn btn-outline-primary btn-list share-button" title="Bruckner Meets Mozart" name="https://educationcity.qa/event/bruckner-meets-mozart" role="button"><i class="bi bi-reply d-block flip-90"></i></a>
+            </div>
+           </div>
+          </div>
+        </div>
+      </div>
+     </div>
+  
+    
+      {% endfor %}
+        <!-- hover -->
+       
+   
+      </section>
+<div class="container-lg py-5">
+ <ul class="pagination justify-content-center">
+  
+     <li class="disabled d-none"><i class="bi bi-chevron-left"></i></li>
+  
+                <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                     <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=2">2</a></li>
+                     <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=3">3</a></li>
+                     <li class="page-item"><a class="page-link" href="https://educationcity.qa/events?page=4">4</a></li>
+           
+  
+        <li class="page-item">
+    <a class="page-link" href="https://educationcity.qa/events?page=2" rel="next" aria-label="Next &raquo;"><i class="bi bi-chevron-right"></i></a>
+   </li>
+
+   </ul>
+
+
+</div>
+<div class="modal fade" id="social-share-modal" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered page-modal" role="document">
+  <div class="modal-content">
+   <div class="modal-body p-4">
+
+    <h5 class="modal-title" id="interestedModalLabel">Share</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-body text-center">
+     <div class="inner inner-center" id="shareable_content">
+
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+  </div>
+  <main class="main-wrapper">
+ </div>
+ </div>
+  
+ {% endblock %}
